@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { GameRoutingModule } from './game-routing.module';
 import { ListComponent } from './pages/list/list.component';
 import { GameComponent } from './layout/game/game.component';
+import {NgxPaginationModule} from "ngx-pagination";
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { GameComponent } from './layout/game/game.component';
   ],
   imports: [
     CommonModule,
-    GameRoutingModule
+    GameRoutingModule,
+    NgxPaginationModule
   ]
 })
 export class GameModule { }
