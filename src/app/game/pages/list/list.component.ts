@@ -10,13 +10,20 @@ import {Game} from "../../interfaces/game.interface";
 })
 export class ListComponent implements OnInit{
 
-  content:Game[]=[];
+  games:Game[]=[];
   currentPage:number=1;
   totalPages:number=0;
   totalElements:number=0;
   tableSize:number=10;
   tableSizes:any=[10,50,100];
 
+  public labels: any = {
+    previousLabel: '',
+    nextLabel: '',
+    screenReaderPaginationLabel: 'Pagination',
+    screenReaderPageLabel: 'page',
+    screenReaderCurrentLabel: `You're on page`
+  };
   constructor(private gameService:GameService){
   }
 
@@ -29,7 +36,7 @@ export class ListComponent implements OnInit{
       .set('pageNo', this.currentPage -1 )
       .set('pageSize', this.tableSize);
     this.gameService.getGamePaged(params).subscribe(res => {
-      this.content= res.content;
+      this.games= res.content;
       this.totalElements=res.totalElements;
       this.totalPages=res.totalPages;
       this.totalElements = res.totalElements;
