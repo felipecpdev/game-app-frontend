@@ -13,4 +13,20 @@ export class GameService {
   getGamePaged(params:any):Observable<any>{
     return this.http.get<any>(baseUrl+'games/paginated', {params:params})
   }
+
+  get(id: any): Observable<any> {
+    return this.http.get(`${baseUrl}/${id}`);
+  }
+
+  createGame(data: any): Observable<any> {
+    return this.http.post(baseUrl, data);
+  }
+
+  updateGame(id: any, data: any): Observable<any> {
+    return this.http.put(`${baseUrl}/${id}`, data);
+  }
+
+  deleteGame(id: any): Observable<any> {
+    return this.http.delete(`${baseUrl}/${id}`);
+  }
 }
