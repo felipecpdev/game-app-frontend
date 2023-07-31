@@ -6,6 +6,7 @@ import { ListComponent } from './pages/list/list.component';
 import { GameComponent } from './layout/game/game.component';
 import {NgxPaginationModule} from "ngx-pagination";
 import {FormsModule} from "@angular/forms";
+import {SharedModule} from "../shared/shared.module";
 
 
 @NgModule({
@@ -13,11 +14,12 @@ import {FormsModule} from "@angular/forms";
     ListComponent,
     GameComponent
   ],
-  imports: [
-    CommonModule,
-    GameRoutingModule,
-    NgxPaginationModule,
-    FormsModule
-  ]
+    imports: [
+        CommonModule,
+        GameRoutingModule,
+        NgxPaginationModule,
+        FormsModule,
+        SharedModule
+    ]
 })
 export class GameModule { }

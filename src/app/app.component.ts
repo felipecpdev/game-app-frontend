@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import { initFlowbite } from 'flowbite'
+import {initFlowbite, initModals} from 'flowbite'
 
 @Component({
   selector: 'app-root',

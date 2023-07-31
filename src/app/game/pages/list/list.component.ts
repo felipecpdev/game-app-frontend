@@ -2,8 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {GameService} from "../../services/game.service";
 import {HttpParams} from "@angular/common/http";
 import {Game} from "../../interfaces/game.interface";
-import type {DropdownOptions, DropdownInterface} from "flowbite";
-import {Dropdown, initDropdowns} from "flowbite";
+import {Dropdown, initDropdowns, Modal} from "flowbite";
 
 @Component({
   selector: 'app-list',
@@ -19,24 +18,8 @@ export class ListComponent implements OnInit {
   tableSize: number = 10;
   //tableSizes:any=[10,50,100];
   name = '';
-
-
-  options: DropdownOptions = {
-    placement: 'bottom',
-    triggerType: 'click',
-    offsetSkidding: 0,
-    offsetDistance: 10,
-    delay: 300,
-    onHide: () => {
-      console.log('dropdown has been hidden');
-    },
-    onShow: () => {
-      console.log('dropdown has been shown');
-    },
-    onToggle: () => {
-      console.log('dropdown has been toggled');
-    }
-  };
+  loading: boolean = false;
+  modalDelete: boolean = false;
 
   public labels: any = {
     previousLabel: '',
@@ -59,11 +42,16 @@ export class ListComponent implements OnInit {
       .set('pageNo', this.currentPage - 1)
       .set('pageSize', this.tableSize)
       .set('name', this.name);
-    this.gameService.getGamePaged(params).subscribe(res => {
-      this.games = res.content;
-      this.totalElements = res.totalElements;
-      this.totalPages = res.totalPages;
-      console.log(res);
+    this.gameService.getGamePaged(params).subscribe({
+      next: (res) => {
+        this.games = res.content;
+        this.totalElements = res.totalElements;
+        this.totalPages = res.totalPages;
+        console.log(res);
+      },
+      error: (error) => {
+        console.error(error)
+      }
     })
   }
 
@@ -78,29 +66,21 @@ export class ListComponent implements OnInit {
     this.findAll();
   }
 
-  deleteGame(event: any, id: number) {
+  openModal(event: any, id: number) {
     event.preventDefault()
-    console.log(id);
-    this.gameService.deleteGame(id).subscribe(value => {
-        console.log("eliminado" + id);
-        this.findAll();
-      },
-      error => {
-        console.error(error)
-      })
+    this.modalDelete=true;
   }
 
-  ele: any;
-  triggerEl: any;
-  dropdown: DropdownInterface = new Dropdown();
-
-  click(event: MouseEvent, index: number) {
-    event.preventDefault();
-    //this.triggerEl = document.getElementById('dropdownDefaultButton' + index);
-    this.ele = document.getElementById('dropdown' + index);
-    this.ele.classList.toggle('hidden');
-    console.log(this.ele.classList);
-
-
+  deleteGame(event: any, id: number){
+    this.gameService.deleteGame(id).subscribe({
+        next: (res) => {
+          console.log("eliminado" + id);
+          this.findAll();
+        },
+        error: (error) => {
+          console.error(error)
+        }
+      }
+    )
   }
 }
