@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {ListComponent} from "./pages/list/list.component";
 import {GameComponent} from "./layout/game/game.component";
+import {NewGameComponent} from "./pages/new-game/new-game.component";
 
 const routes: Routes = [
   {
@@ -10,6 +11,9 @@ const routes: Routes = [
     children: [
       {
         path: 'list', component: ListComponent
+      },
+      {
+        path:'new-game',component:NewGameComponent
       },
       {
         path: '**', redirectTo: 'list'

@@ -1,25 +1,29 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { GameRoutingModule } from './game-routing.module';
-import { ListComponent } from './pages/list/list.component';
-import { GameComponent } from './layout/game/game.component';
+import {GameRoutingModule} from './game-routing.module';
+import {ListComponent} from './pages/list/list.component';
+import {GameComponent} from './layout/game/game.component';
 import {NgxPaginationModule} from "ngx-pagination";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {SharedModule} from "../shared/shared.module";
+import {NewGameComponent} from './pages/new-game/new-game.component';
 
 
 @NgModule({
   declarations: [
     ListComponent,
-    GameComponent
+    GameComponent,
+    NewGameComponent
   ],
-    imports: [
-        CommonModule,
-        GameRoutingModule,
-        NgxPaginationModule,
-        FormsModule,
-        SharedModule
-    ]
+  imports: [
+    CommonModule,
+    GameRoutingModule,
+    NgxPaginationModule,
+    FormsModule,
+    SharedModule,
+    ReactiveFormsModule,
+  ]
 })
-export class GameModule { }
+export class GameModule {
+}

@@ -4,6 +4,8 @@ import {HttpParams} from "@angular/common/http";
 import {Game} from "../../interfaces/game.interface";
 import { Modal } from 'flowbite'
 import type { ModalOptions, ModalInterface } from 'flowbite';
+import {FormGroup} from "@angular/forms";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-list',
@@ -13,6 +15,7 @@ import type { ModalOptions, ModalInterface } from 'flowbite';
 export class ListComponent implements OnInit {
 
   games: Game[] = [];
+  selectedGame?:Game;
   currentPage: number = 1;
   totalPages: number = 0;
   totalElements: number = 0;
@@ -22,17 +25,10 @@ export class ListComponent implements OnInit {
   loading: boolean = false;
   loadingTable: boolean = false;
   showModalDelete: boolean = false;
-  selectedGame?:Game;
 
-  public labels: any = {
-    previousLabel: '',
-    nextLabel: '',
-    screenReaderPaginationLabel: 'Pagination',
-    screenReaderPageLabel: 'page',
-    screenReaderCurrentLabel: `You're on page`
-  };
-
-  constructor(private gameService: GameService) {
+  constructor(private gameService: GameService,
+              private activatedRoute: ActivatedRoute,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -70,6 +66,18 @@ export class ListComponent implements OnInit {
     this.findAll()
   }
 
+  handleNextPage(){
+    console.log(this.currentPage);
+    this.currentPage++;
+    this.findAll()
+  }
+
+  handlePreviousPage(){
+    console.log(this.currentPage);
+    this.currentPage--;
+    this.findAll()
+  }
+
   searchByName(): void {
     console.log(this.name);
     this.currentPage = 1;
@@ -99,5 +107,9 @@ export class ListComponent implements OnInit {
         }
       }
     )
+  }
+
+  goNewGame() {
+    this.router.navigateByUrl('game/new-game')
   }
 }
