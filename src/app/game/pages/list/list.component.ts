@@ -2,7 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {GameService} from "../../services/game.service";
 import {HttpParams} from "@angular/common/http";
 import {Game} from "../../interfaces/game.interface";
-import {Dropdown, initDropdowns, Modal} from "flowbite";
+import { Modal } from 'flowbite'
+import type { ModalOptions, ModalInterface } from 'flowbite';
 
 @Component({
   selector: 'app-list',
@@ -19,7 +20,9 @@ export class ListComponent implements OnInit {
   //tableSizes:any=[10,50,100];
   name = '';
   loading: boolean = false;
-  modalDelete: boolean = false;
+  loadingTable: boolean = false;
+  showModalDelete: boolean = false;
+  selectedGame?:Game;
 
   public labels: any = {
     previousLabel: '',
@@ -33,11 +36,11 @@ export class ListComponent implements OnInit {
   }
 
   ngOnInit() {
-    //initDropdowns();
     this.findAll();
   }
 
   findAll() {
+    this.loadingTable=true;
     let params = new HttpParams()
       .set('pageNo', this.currentPage - 1)
       .set('pageSize', this.tableSize)
@@ -48,9 +51,16 @@ export class ListComponent implements OnInit {
         this.totalElements = res.totalElements;
         this.totalPages = res.totalPages;
         console.log(res);
+
+        setTimeout(() =>{
+          this.loadingTable=false;
+        }, 1000);
+
+
       },
       error: (error) => {
         console.error(error)
+        this.loadingTable=false;
       }
     })
   }
@@ -66,18 +76,25 @@ export class ListComponent implements OnInit {
     this.findAll();
   }
 
-  openModal(event: any, id: number) {
-    event.preventDefault()
-    this.modalDelete=true;
+  openModal($event:any,game:Game) {
+    this.showModalDelete = true;
+    this.selectedGame=game;
   }
 
-  deleteGame(event: any, id: number){
-    this.gameService.deleteGame(id).subscribe({
+  closeModal() {
+    this.showModalDelete = false;
+  }
+
+  deleteGame(){
+    this.loading=true;
+    this.gameService.deleteGame(this.selectedGame?.id).subscribe({
         next: (res) => {
-          console.log("eliminado" + id);
+          this.closeModal()
+          this.loading=false;
           this.findAll();
         },
         error: (error) => {
+          this.loading=false;
           console.error(error)
         }
       }
