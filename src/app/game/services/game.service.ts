@@ -14,7 +14,7 @@ export class GameService {
     return this.http.get<any>(baseUrl+'/paginated', {params:params})
   }
 
-  get(id: any): Observable<any> {
+  getGameById(id: any): Observable<any> {
     return this.http.get(`${baseUrl}/${id}`);
   }
 

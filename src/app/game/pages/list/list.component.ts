@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {GameService} from "../../services/game.service";
 import {HttpParams} from "@angular/common/http";
 import {Game} from "../../interfaces/game.interface";
-import { Modal } from 'flowbite'
-import type { ModalOptions, ModalInterface } from 'flowbite';
+import {Modal} from 'flowbite'
+import type {ModalOptions, ModalInterface} from 'flowbite';
 import {FormGroup} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 
@@ -15,7 +15,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 export class ListComponent implements OnInit {
 
   games: Game[] = [];
-  selectedGame?:Game;
+  selectedGame?: Game;
   currentPage: number = 1;
   totalPages: number = 0;
   totalElements: number = 0;
@@ -36,7 +36,7 @@ export class ListComponent implements OnInit {
   }
 
   findAll() {
-    this.loadingTable=true;
+    this.loadingTable = true;
     let params = new HttpParams()
       .set('pageNo', this.currentPage - 1)
       .set('pageSize', this.tableSize)
@@ -46,17 +46,13 @@ export class ListComponent implements OnInit {
         this.games = res.content;
         this.totalElements = res.totalElements;
         this.totalPages = res.totalPages;
-        console.log(res);
-
-        setTimeout(() =>{
-          this.loadingTable=false;
+        setTimeout(() => {
+          this.loadingTable = false;
         }, 1000);
-
-
       },
       error: (error) => {
         console.error(error)
-        this.loadingTable=false;
+        this.loadingTable = false;
       }
     })
   }
@@ -66,13 +62,13 @@ export class ListComponent implements OnInit {
     this.findAll()
   }
 
-  handleNextPage(){
+  handleNextPage() {
     console.log(this.currentPage);
     this.currentPage++;
     this.findAll()
   }
 
-  handlePreviousPage(){
+  handlePreviousPage() {
     console.log(this.currentPage);
     this.currentPage--;
     this.findAll()
@@ -84,25 +80,26 @@ export class ListComponent implements OnInit {
     this.findAll();
   }
 
-  openModal($event:any,game:Game) {
+  openModal($event: any, game: Game) {
     this.showModalDelete = true;
-    this.selectedGame=game;
+    this.selectedGame = game;
   }
 
   closeModal() {
     this.showModalDelete = false;
   }
 
-  deleteGame(){
-    this.loading=true;
+  deleteGame() {
+    this.loading = true;
     this.gameService.deleteGame(this.selectedGame?.id).subscribe({
         next: (res) => {
           this.closeModal()
-          this.loading=false;
+          this.loading = false;
           this.findAll();
         },
         error: (error) => {
-          this.loading=false;
+          this.closeModal()
+          this.loading = false;
           console.error(error)
         }
       }
@@ -111,5 +108,9 @@ export class ListComponent implements OnInit {
 
   goNewGame() {
     this.router.navigateByUrl('game/new-game')
+  }
+
+  goEdit(game: Game) {
+    this.router.navigateByUrl('/game/edit/' + game.id)
   }
 }

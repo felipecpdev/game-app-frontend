@@ -1,5 +1,5 @@
 <div class="container mx-auto">
-  <form class="mb-1">
+  <form *ngIf="!loadingTable" class="mb-1">
     <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
     <div class="relative w-full lg:w-96">
       <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -19,7 +19,7 @@
     </div>
   </form>
   <div class="flex justify-end w-full py-3 pr-3 bg-gray-50 dark:bg-gray-700 rounded-t-lg">
-    <button type="button"
+    <button [disabled]="loadingTable" type="button"
             class="text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
             (click)="goNewGame()">
       <svg class="w-[16px] h-[16px]" aria-hidden="true"
@@ -89,8 +89,9 @@
                 d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/>
             </svg>
           </button>
-
-          <button type="button"
+          <button
+            (click)="goEdit(game)"
+            type="button"
                   class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
             <svg class="w-[16px] h-[16px]" aria-hidden="true"
                  xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -105,7 +106,6 @@
             (click)="openModal($event,game)"
             type="button"
             class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-
           >
             <svg class="w-[16px] h-[16px]" aria-hidden="true"
                  xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -124,8 +124,7 @@
       <h1>No existen registros.</h1>
     </div>
   </ng-container>
-  <div *ngIf="!loadingTable" class="flex flex-col items-center pt-2 bg-gray-50 dark:bg-gray-900 rounded-b-lg">
-
+  <div *ngIf="!loadingTable && games.length > 0" class="flex flex-col items-center pt-2 bg-gray-50 dark:bg-gray-900 rounded-b-lg">
     <div class="flex flex-col items-center">
       <span class="text-sm text-gray-700 dark:text-gray-400">
       Página <span class="font-semibold text-gray-900 dark:text-white">{{ currentPage }}</span> / <span

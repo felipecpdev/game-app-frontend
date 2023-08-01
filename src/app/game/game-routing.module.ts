@@ -13,7 +13,10 @@ const routes: Routes = [
         path: 'list', component: ListComponent
       },
       {
-        path:'new-game',component:NewGameComponent
+        path: 'new-game', component: NewGameComponent
+      },
+      {
+        path: 'edit/:id', component: NewGameComponent
       },
       {
         path: '**', redirectTo: 'list'
