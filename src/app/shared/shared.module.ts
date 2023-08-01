@@ -5,6 +5,8 @@ import {AsideComponent} from './components/aside/aside.component';
 import {SpinnerComponent} from './components/spinner/spinner.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { SkeletonTableComponent } from './components/skeleton-table/skeleton-table.component';
+import { ChileDatePipe } from './pipes/chile-date.pipe';
+import { ArtImagePipe } from './pipes/art-image.pipe';
 
 
 @NgModule({
@@ -13,7 +15,9 @@ import { SkeletonTableComponent } from './components/skeleton-table/skeleton-tab
     AsideComponent,
     SpinnerComponent,
     ModalComponent,
-    SkeletonTableComponent
+    SkeletonTableComponent,
+    ChileDatePipe,
+    ArtImagePipe
   ],
   imports: [
     CommonModule
@@ -23,7 +27,9 @@ import { SkeletonTableComponent } from './components/skeleton-table/skeleton-tab
     AsideComponent,
     SpinnerComponent,
     ModalComponent,
-    SkeletonTableComponent
+    SkeletonTableComponent,
+    ChileDatePipe,
+    ArtImagePipe
   ]
 })
 export class SharedModule {

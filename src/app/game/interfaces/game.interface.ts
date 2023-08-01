@@ -16,5 +16,5 @@ export interface Game {
   gameArt:     null;
   active:      boolean;
   dateCreated: null;
-  lastUpdated: null;
+  lastUpdate: null;
 }

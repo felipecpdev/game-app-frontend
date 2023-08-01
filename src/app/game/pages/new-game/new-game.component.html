@@ -1,29 +1,62 @@
 <div class="container mx-auto">
-  <h1
-    class="mb-10 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
-    Crear nuevo juego</h1>
-
-
+  <ng-container *ngIf="!currentGame.id; else otherTitle">
+    <h1
+      class="mb-10 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+      Agregar nuevo juego</h1>
+  </ng-container>
+  <ng-template #otherTitle>
+    <h1
+      class="mb-10 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+      Actualizar juego</h1>
+  </ng-template>
   <form [formGroup]="gameForm" (ngSubmit)="onSubmit()">
-    <div class="flex flex-col gap-3 md:flex-row">
-      <div class="mb-6 w-full md:w-1/2">
+    <div class="grid grid-cols-1  gap-3 lg:grid-cols-3 mb-2">
+      <div class="w-full">
         <label for="game_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre del
           Juego</label>
         <input type="text" id="game_name" required autocomplete="off"
                formControlName="gameName"
                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
       </div>
-      <div class="mb-6 w-full md:w-1/2">
+      <div class="w-full">
+        <label for="developer" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Desarrollador</label>
+        <input type="text" id="developer"  autocomplete="off"
+               formControlName="developer"
+               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+      </div>
+      <div class="w-full ">
+        <label for="engine" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Motor</label>
+        <input type="text" id="engine"  autocomplete="off"
+               formControlName="engine"
+               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+      </div>
+      <div class="w-full">
+        <label for="gameArt" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Arte del juego</label>
+        <input type="text" id="gameArt"  autocomplete="off"
+               formControlName="gameArt"
+               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+      </div>
+      <div class="w-full md:col-span-2">
         <label for="description"
                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descripción</label>
-        <textarea id="description" rows="4" required
+        <textarea id="description" rows="4"
                   formControlName="description"
                   class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Escribe su descripción..."></textarea>
       </div>
-
+      <div class="w-full grid items-center">
+        <label for="active" class="relative inline-flex items-center cursor-pointer">
+          <input formControlName="active" id="active" type="checkbox" value="" class="sr-only peer">
+          <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+          <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Habilitado</span>
+        </label>
+      </div>
     </div>
-    <div class="flex justify-between">
+    <div *ngIf="currentGame.id" class="flex flex-col md:flex-row justify-evenly">
+      <p class="text-base text-gray-900 dark:text-white">Creado el : {{currentGame.dateCreated | chileDate:'medium'}}</p>
+      <p *ngIf="currentGame.lastUpdate" class="text-base text-gray-900 dark:text-white">Última Actualización: {{currentGame.lastUpdate| chileDate}}</p>
+    </div>
+    <div class="flex justify-between mt-1">
       <button (click)="goBack()" type="button"
               class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-900">
         Volver
@@ -34,5 +67,6 @@
       </button>
     </div>
   </form>
-
 </div>
+
+<app-spinner *ngIf="loading"></app-spinner>
