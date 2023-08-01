@@ -1,0 +1,114 @@
+
+::ng-deep {
+  .ngx-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .ngx-pagination li {
+    width: 2.1875rem;
+    height: 2.1875rem;
+    border-radius: 50% !important;
+    background: #243c5a;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    color: white;
+
+    &.small-screen {
+      display: none !important;
+    }
+
+    &.pagination-previous,
+    &.pagination-next {
+      a, span {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        overflow: hidden;
+        background-color: #243c5a;
+        color: white;
+      }
+    }
+  }
+
+  .ngx-pagination .pagination-previous a:before,
+  .ngx-pagination .pagination-previous.disabled:before,
+  .ngx-pagination .pagination-next::before {
+    margin-right: 0px !important;
+    font-size: 26px;
+    margin-top: -8px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    left: 0;
+    pointer-events: none;
+  }
+
+  .ngx-pagination .pagination-next::before {
+    content: '\bb';
+  }
+
+  .ngx-pagination .pagination-next::after {
+    display: none !important;
+  }
+
+  .ngx-pagination .pagination-previous.disabled:before {
+    opacity: 0.4;
+  }
+
+  .ngx-pagination .pagination-next.disabled:before {
+    display: none !important;
+  }
+
+  .ngx-pagination .pagination-previous.disabled:hover {
+    background: #243c5a !important;
+  }
+
+  .ngx-pagination .pagination-next.disabled:hover {
+    background: #243c5a !important;
+    opacity: 0.5;
+  }
+
+  .ngx-pagination a:hover,
+  .ngx-pagination button:hover {
+    background: #243c5a !important;
+    border-radius: 100%;
+  }
+
+  .ngx-pagination li > a {
+    color: white !important;
+  }
+
+  .ngx-pagination .pagination-next.disabled,
+  .ngx-pagination .pagination-next.disabled::before,
+  .ngx-pagination .pagination-next.disabled a,
+  .ngx-pagination .pagination-next.disabled span {
+    display: none !important;
+  }
+
+  .ngx-pagination .pagination-next a:after,
+  .ngx-pagination .pagination-next.disabled:after {
+    content: none !important;
+  }
+
+  .ngx-pagination .current {
+    background: #243c5a !important;
+    transform: scale(1.2);
+    font-weight: bold;
+  }
+}
+
+.showing-pages {
+  display: block;
+}
+
+
