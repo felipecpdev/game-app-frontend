@@ -43,6 +43,7 @@ export class ListComponent implements OnInit {
       .set('name', this.name);
     this.gameService.getGamePaged(params).subscribe({
       next: (res) => {
+        console.log(res);
         this.games = res.content;
         this.totalElements = res.totalElements;
         this.totalPages = res.totalPages;
@@ -112,5 +113,17 @@ export class ListComponent implements OnInit {
 
   goEdit(game: Game) {
     this.router.navigateByUrl('/game/edit/' + game.id)
+  }
+
+  handleLastPage() {
+    console.log(this.totalPages);
+    console.log(this.currentPage);
+    this.currentPage= this.totalPages;
+    this.findAll();
+  }
+
+  handleFirstPage() {
+    this.currentPage=1;
+    this.findAll()
   }
 }
