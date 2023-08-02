@@ -21,6 +21,7 @@ export class ListComponent implements OnInit {
   totalElements: number = 0;
   tableSize: number = 10;
   //tableSizes:any=[10,50,100];
+
   name = '';
   loading: boolean = false;
   loadingTable: boolean = false;
@@ -118,12 +119,12 @@ export class ListComponent implements OnInit {
   handleLastPage() {
     console.log(this.totalPages);
     console.log(this.currentPage);
-    this.currentPage= this.totalPages;
+    this.currentPage = this.totalPages;
     this.findAll();
   }
 
   handleFirstPage() {
-    this.currentPage=1;
+    this.currentPage = 1;
     this.findAll()
   }
 }
