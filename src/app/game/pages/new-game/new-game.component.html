@@ -19,20 +19,21 @@
                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
       </div>
       <div class="w-full">
-        <label for="developer" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Desarrollador</label>
-        <input type="text" id="developer"  autocomplete="off"
+        <label for="developer"
+               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Desarrollador</label>
+        <input type="text" id="developer" autocomplete="off"
                formControlName="developer"
                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
       </div>
       <div class="w-full ">
         <label for="engine" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Motor</label>
-        <input type="text" id="engine"  autocomplete="off"
+        <input type="text" id="engine" autocomplete="off"
                formControlName="engine"
                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
       </div>
       <div class="w-full">
         <label for="gameArt" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Arte del juego</label>
-        <input type="text" id="gameArt"  autocomplete="off"
+        <input type="text" id="gameArt" autocomplete="off"
                formControlName="gameArt"
                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
       </div>
@@ -47,14 +48,17 @@
       <div class="w-full grid items-center">
         <label for="active" class="relative inline-flex items-center cursor-pointer">
           <input formControlName="active" id="active" type="checkbox" value="" class="sr-only peer">
-          <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+          <div
+            class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
           <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Habilitado</span>
         </label>
       </div>
     </div>
     <div *ngIf="currentGame.id" class="flex flex-col md:flex-row justify-evenly">
-      <p class="text-base text-gray-900 dark:text-white">Creado el : {{currentGame.dateCreated | chileDate:'medium'}}</p>
-      <p *ngIf="currentGame.lastUpdate" class="text-base text-gray-900 dark:text-white">Última Actualización: {{currentGame.lastUpdate| chileDate}}</p>
+      <p class="text-base text-gray-900 dark:text-white">Creado el
+        : {{currentGame.dateCreated | chileDate:'medium'}}</p>
+      <p *ngIf="currentGame.lastUpdated" class="text-base text-gray-900 dark:text-white">Última
+        Actualización: {{currentGame.lastUpdated| chileDate}}</p>
     </div>
     <div class="flex justify-between mt-1">
       <button (click)="goBack()" type="button"

@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormControl, FormGroup} from "@angular/forms";
 import {GameService} from "../../services/game.service";
@@ -23,13 +23,12 @@ export class NewGameComponent implements OnInit {
     description: new FormControl<string>('', {nonNullable: true}),
     gameArt: new FormControl<string>(''),
     dateCreated: new FormControl<string>(''),
-    lastUpdate: new FormControl<string>(''),
+    lastUpdated: new FormControl<string>(''),
   });
 
   constructor(private gameService: GameService,
               private router: Router,
-              private activatedRoute: ActivatedRoute,
-              private cdr: ChangeDetectorRef) {
+              private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -37,7 +36,6 @@ export class NewGameComponent implements OnInit {
     //TODO: en prod eliminar setTimeout
     setTimeout(() => {
       this.loading = false;
-
 
       if (!this.router.url.includes('edit')) return;
       this.activatedRoute.params
@@ -56,8 +54,7 @@ export class NewGameComponent implements OnInit {
   }
 
   get currentGame(): Game {
-    const game = this.gameForm.value as Game;
-    return game;
+    return this.gameForm.value as Game;
   }
 
   goBack(): void {
