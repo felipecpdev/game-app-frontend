@@ -1,5 +1,10 @@
-#defaultModal {
+#game-view {
   display: grid;
   place-items: center;
-  background-color: rgb(255,255,255,0.3);
+  background-color: rgba(35, 56, 118, 0.3);;
+}
+
+
+.preview-img{
+  background-size: cover;
 }

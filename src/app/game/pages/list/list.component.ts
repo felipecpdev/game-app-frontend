@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {GameService} from "../../services/game.service";
 import {HttpParams} from "@angular/common/http";
-import {Game} from "../../interfaces/game.interface";
+import {GameDTO} from "../../interfaces/game.interface";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {GameViewComponent} from "../../components/game-view/game-view.component";
@@ -13,8 +13,8 @@ import {GameViewComponent} from "../../components/game-view/game-view.component"
 })
 export class ListComponent implements OnInit {
 
-  games: Game[] = [];
-  selectedGame?: Game;
+  games: GameDTO[] = [];
+  selectedGame?: GameDTO;
   currentPage: number = 1;
   totalPages: number = 0;
   totalElements: number = 0;
@@ -82,7 +82,7 @@ export class ListComponent implements OnInit {
     this.findAll();
   }
 
-  openModal($event: any, game: Game) {
+  openModal($event: any, game: GameDTO) {
     this.showModalDelete = true;
     this.selectedGame = game;
   }
@@ -112,7 +112,7 @@ export class ListComponent implements OnInit {
     this.router.navigateByUrl('game/new-game')
   }
 
-  goEdit(game: Game) {
+  goEdit(game: GameDTO) {
     this.router.navigateByUrl('/game/edit/' + game.id)
   }
 
@@ -129,11 +129,23 @@ export class ListComponent implements OnInit {
   }
 
 
-  gameView(game: Game) {
-    const dialogRef = this.dialog.open( GameViewComponent, {
-      data: game
-    });
-
+  gameView(game: GameDTO) {
+    this.loading = true;
+    this.gameService.getGameById(game.id).subscribe(
+      {
+        next: (res: GameDTO) => {
+          console.log(res);
+          this.loading = false;
+          const dialogRef = this.dialog.open(GameViewComponent, {
+            data: res
+          });
+        },
+        error: (error) => {
+          console.error(error);
+          this.loading = false;
+        }
+      }
+    )
 
 
   }

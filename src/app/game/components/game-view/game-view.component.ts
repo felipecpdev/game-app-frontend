@@ -1,6 +1,6 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {Game} from "../../interfaces/game.interface";
+import {GameDTO} from "../../interfaces/game.interface";
 
 @Component({
   selector: 'app-game-view',
@@ -11,7 +11,8 @@ export class GameViewComponent {
 
   constructor(
     public dialogRef: MatDialogRef<GameViewComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Game) {}
+    @Inject(MAT_DIALOG_DATA) public data: GameDTO) {
+  }
 
   onCancel(): void {
     this.dialogRef.close(false);

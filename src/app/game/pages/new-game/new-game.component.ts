@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormControl, FormGroup} from "@angular/forms";
 import {GameService} from "../../services/game.service";
-import {Game} from "../../interfaces/game.interface";
+import {GameDTO} from "../../interfaces/game.interface";
 import {switchMap} from 'rxjs/operators';
 
 @Component({
@@ -42,7 +42,6 @@ export class NewGameComponent implements OnInit {
         .pipe(
           switchMap(({id}) => this.gameService.getGameById(id)),
         ).subscribe(hero => {
-        console.log(hero);
         if (!hero) {
           return this.router.navigateByUrl('/');
         }
@@ -53,8 +52,8 @@ export class NewGameComponent implements OnInit {
     }, 1000);
   }
 
-  get currentGame(): Game {
-    return this.gameForm.value as Game;
+  get currentGame(): GameDTO {
+    return this.gameForm.value as GameDTO;
   }
 
   goBack(): void {
@@ -62,13 +61,11 @@ export class NewGameComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.gameForm.invalid)
     if (this.gameForm.invalid) return;
-    console.log(this.currentGame);
+
     if (this.currentGame.id) {
       this.gameService.updateGame(this.currentGame.id, this.currentGame)
         .subscribe(hero => {
-          console.log(hero);
           this.ngOnInit()
         });
       return;
@@ -76,7 +73,6 @@ export class NewGameComponent implements OnInit {
 
     this.gameService.createGame(this.currentGame).subscribe({
       next: (res) => {
-        console.log(res);
         this.router.navigateByUrl('game/list');
       }
     })
