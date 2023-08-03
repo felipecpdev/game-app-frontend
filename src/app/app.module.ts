@@ -8,6 +8,7 @@ import {NgxPaginationModule} from "ngx-pagination";
 import {SharedModule} from "./shared/shared.module";
 import localeCL from '@angular/common/locales/es-CL';
 import {registerLocaleData} from "@angular/common";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 registerLocaleData(localeCL);
 
 @NgModule({
@@ -19,7 +20,8 @@ registerLocaleData(localeCL);
     AppRoutingModule,
     HttpClientModule,
     NgxPaginationModule,
-    SharedModule
+    SharedModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -8,13 +8,16 @@ import {NgxPaginationModule} from "ngx-pagination";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {SharedModule} from "../shared/shared.module";
 import {NewGameComponent} from './pages/new-game/new-game.component';
+import {MaterialModule} from "../material/material.module";
+import { GameViewComponent } from './components/game-view/game-view.component';
 
 
 @NgModule({
   declarations: [
     ListComponent,
     GameComponent,
-    NewGameComponent
+    NewGameComponent,
+    GameViewComponent
   ],
   imports: [
     CommonModule,
@@ -23,6 +26,7 @@ import {NewGameComponent} from './pages/new-game/new-game.component';
     FormsModule,
     SharedModule,
     ReactiveFormsModule,
+    MaterialModule
   ]
 })
 export class GameModule {

@@ -2,10 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {GameService} from "../../services/game.service";
 import {HttpParams} from "@angular/common/http";
 import {Game} from "../../interfaces/game.interface";
-import {Modal} from 'flowbite'
-import type {ModalOptions, ModalInterface} from 'flowbite';
-import {FormGroup} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
+import {MatDialog} from "@angular/material/dialog";
+import {GameViewComponent} from "../../components/game-view/game-view.component";
 
 @Component({
   selector: 'app-list',
@@ -29,7 +28,8 @@ export class ListComponent implements OnInit {
 
   constructor(private gameService: GameService,
               private activatedRoute: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -126,5 +126,15 @@ export class ListComponent implements OnInit {
   handleFirstPage() {
     this.currentPage = 1;
     this.findAll()
+  }
+
+
+  gameView(game: Game) {
+    const dialogRef = this.dialog.open( GameViewComponent, {
+      data: game
+    });
+
+
+
   }
 }
