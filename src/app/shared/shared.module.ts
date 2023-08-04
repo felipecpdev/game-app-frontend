@@ -7,6 +7,7 @@ import { ModalComponent } from './components/modal/modal.component';
 import { SkeletonTableComponent } from './components/skeleton-table/skeleton-table.component';
 import { ChileDatePipe } from './pipes/chile-date.pipe';
 import { ArtImagePipe } from './pipes/art-image.pipe';
+import { ToastComponent } from './components/toast/toast.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { ArtImagePipe } from './pipes/art-image.pipe';
     ModalComponent,
     SkeletonTableComponent,
     ChileDatePipe,
-    ArtImagePipe
+    ArtImagePipe,
+    ToastComponent
   ],
   imports: [
     CommonModule
@@ -29,7 +31,8 @@ import { ArtImagePipe } from './pipes/art-image.pipe';
     ModalComponent,
     SkeletonTableComponent,
     ChileDatePipe,
-    ArtImagePipe
+    ArtImagePipe,
+    ToastComponent
   ]
 })
 export class SharedModule {

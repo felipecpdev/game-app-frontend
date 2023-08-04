@@ -5,6 +5,8 @@ import {GameDTO} from "../../interfaces/game.interface";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {GameViewComponent} from "../../components/game-view/game-view.component";
+import {ToastComponent} from "../../../shared/components/toast/toast.component";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-list',
@@ -29,7 +31,8 @@ export class ListComponent implements OnInit {
   constructor(private gameService: GameService,
               private activatedRoute: ActivatedRoute,
               private router: Router,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private _snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -90,12 +93,19 @@ export class ListComponent implements OnInit {
   closeModal() {
     this.showModalDelete = false;
   }
+   customClass:any = 'custom-snackbar';
 
   deleteGame() {
     this.loading = true;
     this.gameService.deleteGame(this.selectedGame?.id).subscribe({
         next: (res) => {
-          this.closeModal()
+          this.closeModal();
+          this._snackBar.openFromComponent(ToastComponent, {
+            data: 'success',
+            duration: 3000,
+            horizontalPosition: "end",
+            panelClass: [this.customClass],
+          });
           this.loading = false;
           this.findAll();
         },
@@ -135,6 +145,7 @@ export class ListComponent implements OnInit {
       {
         next: (res: GameDTO) => {
           console.log(res);
+
           this.loading = false;
           const dialogRef = this.dialog.open(GameViewComponent, {
             data: res
