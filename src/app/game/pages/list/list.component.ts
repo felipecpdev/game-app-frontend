@@ -102,9 +102,9 @@ export class ListComponent implements OnInit {
           this.closeModal();
           this._snackBar.openFromComponent(ToastComponent, {
             data: 'success',
-            duration: 3000,
+            duration: 11000,
             horizontalPosition: "end",
-            panelClass: [this.customClass],
+           // panelClass: [this.customClass],
           });
           this.loading = false;
           this.findAll();
