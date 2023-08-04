@@ -1,7 +1,7 @@
-<ng-container [ngSwitch]="data">
+<ng-container [ngSwitch]="data.type">
   <div *ngSwitchCase="'success'">
     <div id="toast-success"
-         class="flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800"
+         class="flex items-center w-full max-w-xs p-4  text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800"
          role="alert">
       <div
         class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
@@ -12,12 +12,12 @@
         </svg>
         <span class="sr-only">Check icon</span>
       </div>
-      <div class="ml-3 text-sm font-normal">Item moved successfully.</div>
+      <div class="ml-3 text-sm font-normal">{{data.message}}</div>
     </div>
   </div>
   <div *ngSwitchCase="'danger'">
     <div id="toast-danger"
-         class="flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800"
+         class="flex items-center w-full max-w-xs p-4  text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800"
          role="alert">
       <div
         class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg dark:bg-red-800 dark:text-red-200">
@@ -28,7 +28,7 @@
         </svg>
         <span class="sr-only">Error icon</span>
       </div>
-      <div class="ml-3 text-sm font-normal">Item has been deleted.</div>
+      <div class="ml-3 text-sm font-normal">{{data.message}}</div>
     </div>
   </div>
   <div *ngSwitchCase="'warning'">
@@ -44,8 +44,7 @@
         </svg>
         <span class="sr-only">Warning icon</span>
       </div>
-      <div class="ml-3 text-sm font-normal">Improve password difficulty.</div>
+      <div class="ml-3 text-sm font-normal">{{data.message}}</div>
     </div>
   </div>
 </ng-container>
-warning

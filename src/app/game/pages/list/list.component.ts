@@ -93,7 +93,8 @@ export class ListComponent implements OnInit {
   closeModal() {
     this.showModalDelete = false;
   }
-   customClass:any = 'custom-snackbar';
+
+  customClass: any = 'custom-snackbar';
 
   deleteGame() {
     this.loading = true;
@@ -101,16 +102,24 @@ export class ListComponent implements OnInit {
         next: (res) => {
           this.closeModal();
           this._snackBar.openFromComponent(ToastComponent, {
-            data: 'success',
-            duration: 11000,
-            horizontalPosition: "end",
-           // panelClass: [this.customClass],
+            data: {
+              type: 'success', message: 'Eliminado correctamente'
+            },
+            duration: 3000,
+            horizontalPosition: "end"
           });
           this.loading = false;
           this.findAll();
         },
         error: (error) => {
           this.closeModal()
+          this._snackBar.openFromComponent(ToastComponent, {
+            data: {
+              type: 'danger', message: 'Ocurrió un error!!'
+            },
+            duration: 3000,
+            horizontalPosition: "end"
+          });
           this.loading = false;
           console.error(error)
         }
